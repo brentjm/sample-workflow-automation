@@ -22,7 +22,8 @@ export const SampleForm: React.FC = () => {
   React.useEffect(() => {
     // Retrieve the state from the server database on
     // page load/reload.
-    fetch("http://"+process.env.REACT_APP_SERVERIP+"/getState")
+    let url = "http://"+process.env.REACT_APP_SERVERIP+"/getState";
+    fetch(url)
     .then(resp => resp.json())
     .then(resp => {
       setState({...state,

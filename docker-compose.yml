@@ -5,12 +5,12 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    image: dissocam-api
-    container_name:  dissocam-api
+    image: swa-api
+    container_name:  swa-api
     ports:
-      - "8000:8000"
+      - "27991:8000"
     networks:
-      - dissocam
+      - swa
     depends_on: 
       - mqtt
     restart: unless-stopped
@@ -18,24 +18,21 @@ services:
     build:
       context: ./ui-server
       dockerfile: Dockerfile
-    image: dissocam-ui
-    container_name: dissocam-ui
+    image: swa-ui
+    container_name: swa-ui
     ports:
-      - "80:80"
+      - "27990:80"
     networks:
-      - dissocam
+      - swa
     restart: unless-stopped
   mqtt:
       build: 
         context: ./mqtt
         dockerfile: Dockerfile
       image: eclipse-mosquitto
-      container_name: "mosquitto"
-      ports:
-        - "1883:1883"
-        - "9001:9001"
+      container_name: swa-mqtt
       networks:
-        - dissocam
+        - swa
       volumes:
         - type: volume
           source: log
@@ -49,5 +46,4 @@ volumes:
   data:
 
 networks:
-  dissocam:
-    external: true
+  swa:
