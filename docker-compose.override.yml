@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  flaskapi:
+    volumes:
+      - type: bind
+        source: ./demo_camera_files
+        target: /camera_files
+  ui-server:
+    volumes:
+      - type: bind
+        source: ./demo_camera_files
+        target: /usr/share/nginx/html/camera_files

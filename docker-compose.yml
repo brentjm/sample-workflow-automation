@@ -1,0 +1,53 @@
+version: '3.5'
+
+services:
+  flaskapi:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: dissocam-api
+    container_name:  dissocam-api
+    ports:
+      - "8000:8000"
+    networks:
+      - dissocam
+    depends_on: 
+      - mqtt
+    restart: unless-stopped
+  ui-server:
+    build:
+      context: ./ui-server
+      dockerfile: Dockerfile
+    image: dissocam-ui
+    container_name: dissocam-ui
+    ports:
+      - "80:80"
+    networks:
+      - dissocam
+    restart: unless-stopped
+  mqtt:
+      build: 
+        context: ./mqtt
+        dockerfile: Dockerfile
+      image: eclipse-mosquitto
+      container_name: "mosquitto"
+      ports:
+        - "1883:1883"
+        - "9001:9001"
+      networks:
+        - dissocam
+      volumes:
+        - type: volume
+          source: log
+          target: /mosquitto/log
+        - type: volume
+          source: data
+          target: /mosquitto/data
+
+volumes:
+  log:
+  data:
+
+networks:
+  dissocam:
+    external: true

@@ -1,0 +1,3 @@
+*.vim
+server/videos
+**/__pycache__
