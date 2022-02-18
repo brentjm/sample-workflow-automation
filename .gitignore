@@ -1,3 +1,5 @@
 *.vim
 server/videos
 **/__pycache__
+*.key
+*.crt

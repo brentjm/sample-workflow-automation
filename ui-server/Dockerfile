@@ -9,5 +9,7 @@ RUN yarn\
  && yarn build
 
 FROM nginx
-COPY ./app.conf /etc/nginx/conf.d/.
+COPY ./app.conf /etc/nginx/conf.d/
+RUN mkdir /etc/nginx/ssl
+COPY ./frigg.crt ./frigg.key /etc/nginx/ssl/
 COPY --from=builder /app/build/ /usr/share/nginx/html/
