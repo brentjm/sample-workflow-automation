@@ -38,12 +38,10 @@ export const Header: React.FC<Props> = ({toggleDrawer}) => {
 
   return (
     <AppBar className={classes.root}>
-        <Button style={{"float": "left"}} onClick={toggleDrawer}>
-          <IconButton aria-label="menu" className={classes.menuButton}>
-            <MenuIcon />
-          </IconButton>
-        </Button>
-        <Typography className={classes.title} variant="h4">Workflow Sample Automation</Typography>
+      <IconButton aria-label="menu" className={classes.menuButton} onClick={toggleDrawer} style={{"float": "left"}}>
+        <MenuIcon />
+      </IconButton>
+        <Typography className={classes.title} variant="h4">Sample Workflow Automation</Typography>
         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
           <Avatar />
         </Button>

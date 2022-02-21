@@ -1,9 +1,9 @@
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBody from './AppBody';
 
 function App() {
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: "light"
     }
