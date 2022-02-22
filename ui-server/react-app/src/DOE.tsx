@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Spreadsheet from "react-spreadsheet";
 
@@ -17,30 +17,40 @@ export const DOE: React.FC = () => {
 
   const [columns, setColumns] = React.useState(1);
 
-  const [data, setData] = React.useState([
-    [{ value: "Vanilla" }, { value: "Chocolate" }, { value: "Chocolate" }, { value: "Chocolate" }, { value: "Chocolate" }],
-    [{ value: "Strawberry" }, { value: "Cookies" }, { value: "Chocolate" }, { value: "Chocolate" }, { value: "Chocolate" }],
-  ]);
+  const initialData = new Array(100).fill({value: ""});
 
-  const handleColumnChange = (num: number) => {
-    setColumns(num);
+  const [data, setData] = React.useState([initialData, initialData]);
 
-    setData([new Array(num).fill({value: ""})]);
-  }
+  const handleSubmit = () => {
+    let numRow = data.findIndex((e) => e[0].value === "" );
+    let numCol = data[0].findIndex((e) => e.value === "" );
+    let newData = [];
+    let row = [];
+    for (let i=0; i<numRow; i++) {
+      row = [];
+      for (let j=0; j<numCol; j++) {
+        row.push(data[i][j].value);
+      }
+      newData.push(row);
+    }
+
+    let url = "http://"+process.env.REACT_APP_SERVERIP+"/setDoe";
+    fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newData)
+    });
+    
+
+  };
 
   return (
     <div
       style={{"display": "flex", "flexDirection": "column"}}
     >
-      <TextField 
-          id="columns"
-          label="number columns"
-          helperText="number of columns in DOE"
-          type="number" 
-          value={columns}
-          onChange={(e)=>handleColumnChange(Number(e.target.value))}
-          style={{"width": "200px"}}
-      />
+      <Button onClick={handleSubmit}>
+        Submit
+      </Button>
       <Spreadsheet data={data} onChange={setData} />
     </div>
   );

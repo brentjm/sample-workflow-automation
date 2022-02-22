@@ -4,6 +4,7 @@ import { Tabs, Tab, Typography, Box, Paper } from '@material-ui/core';
 import { SampleFormControl } from './SampleFormControl';
 import { DOE } from './DOE';
 import { SampleTrackerControl } from './SampleTrackerControl';
+import { QRGenerator } from './QRGenerator';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -60,7 +61,7 @@ export default function SimpleTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Sample Form" {...a11yProps(0)} />
           <Tab label="DOE" {...a11yProps(1)} />
-          <Tab label="Sample Tracker" {...a11yProps(2)} />
+          <Tab label="QRGenerator" {...a11yProps(2)} />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
@@ -70,7 +71,7 @@ export default function SimpleTabs() {
         <DOE />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <SampleTrackerControl />
+        <QRGenerator />
       </TabPanel>
     </div>
   );

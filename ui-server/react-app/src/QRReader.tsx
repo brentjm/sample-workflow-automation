@@ -1,16 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { QrReader } from 'react-qr-reader';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    main: {
-    },
-  }),
-);
-
-export const QR: React.FC = (props) => {
+export const QRReader: React.FC = (props) => {
 
 
   const [data, setData] = React.useState('No result');
