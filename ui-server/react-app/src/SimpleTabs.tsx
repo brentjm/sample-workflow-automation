@@ -5,6 +5,7 @@ import { SampleFormControl } from './SampleFormControl';
 import { DOE } from './DOE';
 import { SampleTrackerControl } from './SampleTrackerControl';
 import { QRGenerator } from './QRGenerator';
+import { QRReader } from './QRReader';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,7 +48,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function SimpleTabs() {
+type Props = {
+  setHelpTitle: Function,
+  setHelpText: Function
+}
+
+export const SimpleTabs: React.FC<Props> = ({setHelpTitle, setHelpText}) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -59,19 +65,23 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <Paper>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Sample Form" {...a11yProps(0)} />
-          <Tab label="DOE" {...a11yProps(1)} />
-          <Tab label="QRGenerator" {...a11yProps(2)} />
+          <Tab label="New DOE" {...a11yProps(0)} />
+          <Tab label="Print labels" {...a11yProps(1)} />
+          <Tab label="sample reader" {...a11yProps(2)} />
+          <Tab label="Update Sample" {...a11yProps(3)} />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
-        <SampleFormControl />
+        <DOE setHelpTitle={setHelpTitle} setHelpText={setHelpText} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <DOE />
+        <QRGenerator />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <QRGenerator />
+        <QRReader />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <SampleFormControl />
       </TabPanel>
     </div>
   );

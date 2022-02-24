@@ -7,7 +7,7 @@ Module provides a RESTful API for Sample-Workflow-Automation service.
 
 import logging
 from os.path import exists
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from workflow import Workflow
 import helper_functions
@@ -47,6 +47,30 @@ def set_state():
     params = request.get_json()
     workflow.set_state(**params)
     return "okay"
+
+
+@app.route('/setDoe', methods=['POST'])
+def set_doe():
+    params = request.get_json()
+    workflow.set_doe(**params)
+    return "okay"
+
+
+@app.route('/getProjects', methods=['GET'])
+def get_projects():
+    return jsonify(workflow.get_projects())
+
+
+@app.route('/getProjectData', methods=['GET'])
+def get_project_data():
+    params = request.args
+    return jsonify(workflow.get_project_data(params["project_name"]))
+
+
+@app.route('/getDataById', methods=['GET'])
+def get_data_by_id():
+    params = request.args
+    return jsonify(workflow.get_data_by_id(params["id"]))
 
 
 if __name__ == '__main__':

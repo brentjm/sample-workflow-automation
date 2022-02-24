@@ -9,9 +9,31 @@ type Props = {
 }
 
 const useStyles = makeStyles(theme => ({
+  "@keyframes myEffect": {
+    "0%": {
+      opacity: 1,
+      backgroundPosition: "50% 0%"
+    },
+    "10%": {
+      opacity: 1,
+      backgroundPosition: "100% 0%"
+    },
+    "20%": {
+      opacity: 1,
+      backgroundPosition: "50% 0%"
+    },
+    "100%": {
+      opacity: 1,
+      backgroundPosition: "50% 0%"
+    }
+  },
   root: {
     display: "flex",
     flexDirection: "row",
+	backgroundSize: "400% 400%",
+    backgroundImage: 'linear-gradient(-5deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+    animation: `$myEffect 30000ms ${theme.transitions.easing.easeInOut}`,
+    animationIterationCount: "infinite"
   },
   menuButton: {
     "color": theme.palette.common.white
@@ -41,9 +63,9 @@ export const Header: React.FC<Props> = ({toggleDrawer}) => {
       <IconButton aria-label="menu" className={classes.menuButton} onClick={toggleDrawer} style={{"float": "left"}}>
         <MenuIcon />
       </IconButton>
-        <Typography className={classes.title} variant="h4">Sample Workflow Automation</Typography>
+        <Typography className={classes.title} variant="h6"><b>Smart Lab --</b> <em>Sample Workflow Automation</em></Typography>
         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuClick}>
-          <Avatar />
+          <Avatar style={{width: "30px", height: "30px"}}/>
         </Button>
         <Menu
           id="user"

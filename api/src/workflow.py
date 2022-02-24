@@ -8,6 +8,7 @@ This module defines methos to aid in automating sample workflow.
 import yaml
 import paho.mqtt.client as mqtt
 import helper_functions
+from pdb import set_trace
 
 __author__ = "Brent Maranzano"
 __license__ = "MIT"
@@ -22,6 +23,7 @@ class Workflow():
 
     def __init__(self):
         self._state = {"status": "Hello World from Flask App!"}
+        self._projects = {}
         logger.info("instantiated Workflow")
 
     @classmethod
@@ -83,6 +85,34 @@ class Workflow():
         """
         logger.debug(f"arguments: {kwargs}")
         self._state.update(kwargs)
+
+    def set_doe(self, **kwargs):
+        self._projects[kwargs["project_name"]] = {
+            "header": kwargs["header"],
+            "data": kwargs["data"]
+        }
+        logger.debug(self._projects)
+
+    def get_projects(self):
+        projects = list(self._projects.keys())
+        if len(projects) == 0:
+            return []
+        else:
+            return projects
+
+    def get_project_data(self, project_name):
+        if project_name in self._projects:
+            logger.debug(self._projects[project_name])
+            return self._projects[project_name]
+        else:
+            return {}
+
+    def get_sample_info(self, id):
+        set_trace()
+        for project, data in self._projects.items():
+            for sample in data["data"]:
+                if sample[-1] == id:
+                    return sample
 
 
 if __name__ == "__main__":

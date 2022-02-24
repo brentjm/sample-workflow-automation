@@ -1,9 +1,17 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { SidePanel } from './SidePanel';
 import { Header } from './Header';
 import { Main } from './Main';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100vw",
+    height: "100vh"
+  }
+}));
 
 export default function AppBody() {
 
