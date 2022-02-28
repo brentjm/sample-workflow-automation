@@ -68,7 +68,9 @@ export const SimpleTabs: React.FC<Props> = ({setHelpTitle, setHelpText}) => {
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="New DOE" {...a11yProps(0)} />
           <Tab label="Print labels" {...a11yProps(1)} />
-          <Tab label="Update Sample" {...a11yProps(2)} />
+          <Tab label="Run DOE" {...a11yProps(2)} />
+          <Tab label="Run Method" {...a11yProps(3)} />
+          <Tab label="Update Sample" {...a11yProps(4)} />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
@@ -78,6 +80,12 @@ export const SimpleTabs: React.FC<Props> = ({setHelpTitle, setHelpText}) => {
         <QRGenerator setHelpTitle={setHelpTitle} setHelpText={setHelpText}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
+        <SampleUpdate setHelpTitle={setHelpTitle} setHelpText={setHelpText} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <SampleUpdate setHelpTitle={setHelpTitle} setHelpText={setHelpText} />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
         <SampleUpdate setHelpTitle={setHelpTitle} setHelpText={setHelpText} />
       </TabPanel>
     </div>
