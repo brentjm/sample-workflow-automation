@@ -49,7 +49,7 @@ export const DOE: React.FC<Props> = ({setHelpTitle, setHelpText}) => {
       newData.push(row);
     }
 
-    let url = "http://" + process.env.REACT_APP_SERVERIP + "/setDoe";
+    let url = process.env.REACT_APP_SERVERIP + "/setDoe";
     let DOE = {
       project_name: projectName,
       header: header,

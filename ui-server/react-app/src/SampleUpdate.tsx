@@ -43,7 +43,7 @@ export const SampleUpdate: React.FC<SampleUpdateProps> = ({setHelpTitle, setHelp
   }
 
   const getProjectData = (projectName: string) => {
-    let url = new URL("http://"+process.env.REACT_APP_SERVERIP+"/getProjectData");
+    let url = new URL(process.env.REACT_APP_SERVERIP+"/getProjectData");
     url.searchParams.append("project_name", projectName);
     fetch(url.toString())
     .then(resp => resp.json())

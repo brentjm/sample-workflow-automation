@@ -36,7 +36,7 @@ export const QRGenerator: React.FC<QRGeneratorProps> = ({setHelpTitle, setHelpTe
   }, []);
 
   const getProjectNames = () => {
-    let url = "http://"+process.env.REACT_APP_SERVERIP+"/getProjectNames";
+    let url = process.env.REACT_APP_SERVERIP+"/getProjectNames";
     fetch(url)
     .then(resp => resp.json())
     .then(resp => {
@@ -55,7 +55,7 @@ export const QRGenerator: React.FC<QRGeneratorProps> = ({setHelpTitle, setHelpTe
   };
   
   const getProjectData = (projectName: string) => {
-    let url = new URL("http://"+process.env.REACT_APP_SERVERIP+"/getProjectData");
+    let url = new URL(process.env.REACT_APP_SERVERIP+"/getProjectData");
     url.searchParams.append("project_name", projectName);
     fetch(url.toString())
     .then(resp => resp.json())

@@ -1,0 +1,40 @@
+http:
+  routers:
+    swa-ui:
+      entrypoints: 
+        - web
+        - web-secure
+      tls: true
+      rule: "PathPrefix(`/swa-ui`)"
+      middlewares:
+        - "swa-ui"
+      service: "swa-ui"
+    swa-api:
+      entrypoints: 
+        - web
+        - web-secure
+      tls: true
+      rule: "PathPrefix(`/swa-api`)"
+      middlewares:
+        - "swa-api"
+      service: "swa-api"
+
+  middlewares:
+    swa-ui:
+      stripPrefixRegex:
+        regex:
+          - "/swa-ui"
+    swa-api:
+      stripPrefixRegex:
+        regex:
+          - "/swa-api"
+
+  services:
+    swa-ui:
+      loadBalancer:
+        servers:
+          - url: "http://swa-ui"
+    swa-api:
+      loadBalancer:
+        servers:
+          - url: "http://swa-api:8000"

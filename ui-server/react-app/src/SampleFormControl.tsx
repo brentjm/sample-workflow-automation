@@ -14,7 +14,7 @@ export const SampleFormControl: React.FC = () => {
   React.useEffect(() => {
     // Retrieve the state from the server database on
     // page load/reload.
-    let url = "http://"+process.env.REACT_APP_SERVERIP+"/getState";
+    let url = process.env.REACT_APP_SERVERIP+"/getState";
     fetch(url)
     .then(resp => resp.json())
     .then(resp => {
@@ -25,7 +25,7 @@ export const SampleFormControl: React.FC = () => {
   }, []);
 
   const saveState = () => {
-    let url = "http://"+process.env.REACT_APP_SERVERIP+"/setState";
+    let url = process.env.REACT_APP_SERVERIP+"/setState";
     const data = JSON.stringify({
       "message": state.message
     })
@@ -41,7 +41,7 @@ export const SampleFormControl: React.FC = () => {
   }
 
   const submitForm = () => {
-    let url = "http://"+process.env.REACT_APP_SERVERIP+"/setState";
+    let url = process.env.REACT_APP_SERVERIP+"/setState";
     const data = JSON.stringify({
       "status": state.message
     })
