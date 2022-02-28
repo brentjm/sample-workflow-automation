@@ -56,9 +56,9 @@ def set_doe():
     return "okay"
 
 
-@app.route('/getProjects', methods=['GET'])
-def get_projects():
-    return jsonify(workflow.get_projects())
+@app.route('/getProjectNames', methods=['GET'])
+def get_project_names():
+    return jsonify(workflow.get_project_names())
 
 
 @app.route('/getProjectData', methods=['GET'])
@@ -67,10 +67,10 @@ def get_project_data():
     return jsonify(workflow.get_project_data(params["project_name"]))
 
 
-@app.route('/getDataById', methods=['GET'])
-def get_data_by_id():
+@app.route('/getSampleInfo', methods=['GET'])
+def get_sample_info():
     params = request.args
-    return jsonify(workflow.get_data_by_id(params["id"]))
+    return jsonify(workflow.get_sample_info(params["id"]))
 
 
 if __name__ == '__main__':

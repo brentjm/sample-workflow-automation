@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { SimpleTabs } from './SimpleTabs';
 import { Intro } from './Intro';
 import { HelpPanel } from './HelpPanel';
@@ -32,7 +32,7 @@ export const Main: React.FC = () => {
     <div className={classes.root}>
       <SimpleTabs setHelpTitle={setHelpTitle} setHelpText={setHelpText} />
       <HelpPanel isOpen={isHelpOpen} toggle={toggleHelp} helpTitle={helpTitle} helpText={helpText} />
-      <IconButton onClick={toggleHelp} className={classes.help}>Help</IconButton>
+      <Button onClick={toggleHelp} className={classes.help} variant="outlined">Help</Button>
     </div>
   );
 }

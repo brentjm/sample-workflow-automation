@@ -1,27 +1,40 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Dialog, Button } from '@material-ui/core';
 import { QrReader } from 'react-qr-reader';
 
-export const QRReader: React.FC = (props) => {
 
+type QRReaderProps = {
+  dialogOpen: boolean,
+  handleDialogOpen: Function,
+  setQRData: Function
+}
 
-  const [data, setData] = React.useState('No result');
+export const QRReader: React.FC<QRReaderProps> = ({dialogOpen, handleDialogOpen, setQRData}) => {
 
   return (
-    <div style={{width: "100px"}}>
-      <QrReader
-        constraints={{facingMode: 'user'}}
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result.getText());
-          }
+    <Dialog open={dialogOpen}>
+      <div style={{width: "500px", height: "500px"}}>
+        <Button onClick={()=>handleDialogOpen()}>Close</Button>
+        {dialogOpen ?
+          <QrReader
+            containerStyle={{width: "500px", height: "300px"}}
+            videoStyle={{width: "500px", height: "300px"}}
+            videoContainerStyle={{width: "500px", height: "300px"}}
+            constraints={{facingMode: 'user'}}
+            onResult={(result, error) => {
+              if (!!result) {
+                setQRData(result.getText());
+                handleDialogOpen();
+              }
 
-          if (!!error) {
-            console.log(error);
-          }
-        }}
-      />
-      <p>result: {data}</p>
-    </div>
+              if (!!error) {
+                console.log(error);
+              }
+            }}
+          />
+        : ""}
+      </div>
+    </Dialog>
   );
 };

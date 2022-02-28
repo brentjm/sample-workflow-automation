@@ -1,0 +1,168 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/Docker/sample-workflow-automation/ui-server/react-app/src
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +1 AppBody.tsx
+badd +0 App.test.tsx
+badd +0 App.tsx
+badd +1 DOE.tsx
+badd +66 Header.tsx
+badd +0 index.tsx
+badd +33 Main.tsx
+badd +16 QRGenerator.tsx
+badd +14 QRReader.tsx
+badd +17 SampleFormControl.tsx
+badd +25 SampleForm.tsx
+badd +0 SampleTrackerControl.tsx
+badd +0 SampleTracker.tsx
+badd +0 SidePanel.tsx
+badd +70 SimpleTabs.tsx
+badd +1 ~/Docker/sample-workflow-automation/ui-server/react-app/.env
+badd +13 ~/Docker/sample-workflow-automation/docker-compose.yml
+badd +32 HelpPanel.tsx
+badd +20 Intro.tsx
+argglobal
+%argdel
+$argadd AppBody.tsx
+$argadd App.test.tsx
+$argadd App.tsx
+$argadd DOE.tsx
+$argadd Header.tsx
+$argadd index.tsx
+$argadd Main.tsx
+$argadd QRGenerator.tsx
+$argadd QRReader.tsx
+$argadd SampleFormControl.tsx
+$argadd SampleForm.tsx
+$argadd SampleTrackerControl.tsx
+$argadd SampleTracker.tsx
+$argadd SidePanel.tsx
+$argadd SimpleTabs.tsx
+edit DOE.tsx
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 136 + 137) / 274)
+exe 'vert 2resize ' . ((&columns * 137 + 137) / 274)
+argglobal
+if bufexists("DOE.tsx") | buffer DOE.tsx | else | edit DOE.tsx | endif
+if &buftype ==# 'terminal'
+  silent file DOE.tsx
+endif
+balt AppBody.tsx
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+13
+normal! zo
+27
+normal! zo
+34
+normal! zo
+36
+normal! zo
+43
+normal! zo
+45
+normal! zo
+53
+normal! zo
+58
+normal! zo
+65
+normal! zo
+66
+normal! zo
+68
+normal! zo
+68
+normal! zo
+69
+normal! zo
+72
+normal! zo
+73
+normal! zo
+73
+normal! zo
+82
+normal! zo
+82
+normal! zo
+92
+normal! zo
+let s:l = 65 - ((31 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 65
+normal! 0
+lcd ~/Docker/sample-workflow-automation/ui-server/react-app/src
+wincmd w
+argglobal
+if bufexists("~/Docker/sample-workflow-automation/ui-server/react-app/src/AppBody.tsx") | buffer ~/Docker/sample-workflow-automation/ui-server/react-app/src/AppBody.tsx | else | edit ~/Docker/sample-workflow-automation/ui-server/react-app/src/AppBody.tsx | endif
+if &buftype ==# 'terminal'
+  silent file ~/Docker/sample-workflow-automation/ui-server/react-app/src/AppBody.tsx
+endif
+balt ~/Docker/sample-workflow-automation/ui-server/react-app/src/QRGenerator.tsx
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 30 - ((29 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 30
+normal! 0
+lcd ~/Docker/sample-workflow-automation/ui-server/react-app/src
+wincmd w
+exe 'vert 1resize ' . ((&columns * 136 + 137) / 274)
+exe 'vert 2resize ' . ((&columns * 137 + 137) / 274)
+tabnext 1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=filnxtToOFc
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

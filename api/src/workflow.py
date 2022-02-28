@@ -89,11 +89,12 @@ class Workflow():
     def set_doe(self, **kwargs):
         self._projects[kwargs["project_name"]] = {
             "header": kwargs["header"],
-            "data": kwargs["data"]
+            "data": kwargs["data"],
+            "notes": kwargs["notes"]
         }
         logger.debug(self._projects)
 
-    def get_projects(self):
+    def get_project_names(self):
         projects = list(self._projects.keys())
         if len(projects) == 0:
             return []
@@ -108,7 +109,6 @@ class Workflow():
             return {}
 
     def get_sample_info(self, id):
-        set_trace()
         for project, data in self._projects.items():
             for sample in data["data"]:
                 if sample[-1] == id:
