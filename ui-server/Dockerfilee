@@ -11,5 +11,5 @@ RUN yarn\
 FROM nginx
 COPY ./nginx.conf /etc/nginx/conf.d/
 RUN mkdir /etc/nginx/ssl
-COPY ./swa.crt ./swa.key /etc/nginx/ssl/
+COPY ./swa.crt ./swa.key /etc/nginx/ssl
 COPY --from=builder /app/build/ /usr/share/nginx/html/
